@@ -7,7 +7,9 @@ impl Sorter for MergeSort {
     where
         T: PartialEq + Ord + Clone,
     {
-        Self::mergesort(slice, 0, slice.len() - 1)
+        if !slice.is_empty() {
+            Self::mergesort(slice, 0, slice.len() - 1)
+        }
     }
 }
 

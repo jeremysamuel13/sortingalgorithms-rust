@@ -7,6 +7,7 @@ pub mod bubble;
 pub mod heap;
 pub mod insertion;
 pub mod merge;
+pub mod quick;
 pub mod selection;
 
 pub trait Sorter {
@@ -35,7 +36,11 @@ impl Sorter for StdSorter {
 #[cfg(test)]
 mod tests {
     use crate::{
-        bubble::BubbleSort, heap::HeapSort, insertion::InsertionSort, merge::MergeSort,
+        bubble::BubbleSort,
+        heap::HeapSort,
+        insertion::InsertionSort,
+        merge::MergeSort,
+        quick::{QuickSort, RandQuickSort},
         selection::SelectionSort,
     };
 
@@ -68,16 +73,31 @@ mod tests {
                         assert!(rv[i] > rv[i-1]);
                     }
                 }
+
+                #[test]
+                fn empty() {
+                    let mut empty: Vec<u32> = vec![];
+                    <$type>::sort(&mut empty);
+                    assert_eq!(empty, &[]);
+                }
+
+                #[test]
+                fn already_sorted() {
+                    let mut sorted: Vec<i8> = (-50..50).collect();
+                    <$type>::sort(&mut sorted);
+                    assert_eq!(sorted, (-50..50).collect::<Vec<i8>>());
+                }
             }
         )*
         }
     }
-
     sorting_tests! {
         merge: MergeSort,
         bubble: BubbleSort,
         heap: HeapSort,
         insertion: InsertionSort,
         selection: SelectionSort,
+        quick: QuickSort,
+        randquick: RandQuickSort,
     }
 }
