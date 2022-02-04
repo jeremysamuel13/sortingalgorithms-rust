@@ -23,10 +23,3 @@ impl Sorter for SelectionSort {
         }
     }
 }
-
-#[test]
-fn it_works() {
-    let mut v = vec![0, 3, 2, 12, 5, 3, 9];
-    SelectionSort::sort(&mut v);
-    assert_eq!(v, vec![0, 2, 3, 3, 5, 9, 12]);
-}
