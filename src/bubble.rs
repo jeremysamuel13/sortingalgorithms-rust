@@ -2,8 +2,8 @@ use crate::*;
 
 pub struct BubbleSort;
 
-impl Sorter for BubbleSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for BubbleSort {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord,
     {

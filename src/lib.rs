@@ -10,15 +10,15 @@ pub mod merge;
 pub mod quick;
 pub mod selection;
 
-pub trait Sorter {
-    fn sort<T>(slice: &mut [T])
+pub trait Sorter<T> {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord + Clone;
 }
 pub struct StdSorter;
 
-impl Sorter for StdSorter {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for StdSorter {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord,
     {

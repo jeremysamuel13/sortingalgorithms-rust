@@ -2,8 +2,8 @@ use crate::*;
 
 pub struct MergeSort;
 
-impl Sorter for MergeSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for MergeSort {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord + Clone,
     {

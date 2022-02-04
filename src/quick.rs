@@ -2,10 +2,10 @@ use crate::*;
 
 pub struct RandQuickSort;
 
-impl Sorter for RandQuickSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for RandQuickSort {
+    fn sort(slice: &mut [T])
     where
-        T: PartialEq + Ord + Clone,
+        T: PartialEq + Ord,
     {
         quicksort(slice, true)
     }
@@ -13,10 +13,10 @@ impl Sorter for RandQuickSort {
 
 pub struct QuickSort;
 
-impl Sorter for QuickSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for QuickSort {
+    fn sort(slice: &mut [T])
     where
-        T: PartialEq + Ord + Clone,
+        T: PartialEq + Ord,
     {
         quicksort(slice, false)
     }
@@ -24,7 +24,7 @@ impl Sorter for QuickSort {
 
 fn quicksort<T>(slice: &mut [T], rand: bool)
 where
-    T: PartialEq + Ord + Clone,
+    T: PartialEq + Ord,
 {
     match slice.len() {
         2 => (slice[0] > slice[1])

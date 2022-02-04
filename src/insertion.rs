@@ -2,8 +2,8 @@ use crate::*;
 
 pub struct InsertionSort;
 
-impl Sorter for InsertionSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for InsertionSort {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord,
     {

@@ -2,8 +2,8 @@ use crate::*;
 
 pub struct SelectionSort;
 
-impl Sorter for SelectionSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for SelectionSort {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord,
     {

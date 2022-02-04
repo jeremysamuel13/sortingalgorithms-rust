@@ -2,8 +2,8 @@ use crate::*;
 
 pub struct HeapSort;
 
-impl Sorter for HeapSort {
-    fn sort<T>(slice: &mut [T])
+impl<T> Sorter<T> for HeapSort {
+    fn sort(slice: &mut [T])
     where
         T: PartialEq + Ord,
     {
