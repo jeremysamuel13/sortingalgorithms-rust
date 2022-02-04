@@ -27,7 +27,9 @@ where
     T: PartialEq + Ord + Clone,
 {
     match slice.len() {
-        2 => drop((slice[0] > slice[1]).then(|| slice.swap(0, 1))),
+        2 => (slice[0] > slice[1])
+            .then(|| slice.swap(0, 1))
+            .unwrap_or(()),
         3.. => {
             if rand {
                 //RANDOMIZING PIVOT USING MEDIAN OF 3 RANDOM VALUES

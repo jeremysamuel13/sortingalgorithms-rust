@@ -15,13 +15,6 @@ pub trait Sorter {
     where
         T: PartialEq + Ord + Clone;
 }
-
-pub trait SorterBenchmark: Sorter {
-    fn sort_bench<T>(slice: &mut [T])
-    where
-        T: PartialEq + Ord;
-}
-
 pub struct StdSorter;
 
 impl Sorter for StdSorter {
@@ -48,6 +41,7 @@ mod tests {
         ($($name:ident: $type:ty,)*) => {
         $(
             mod $name {
+                #![allow(unused_imports)]
                 use super::*;
                 use crate::Sorter;
 
@@ -92,6 +86,7 @@ mod tests {
         }
     }
     sorting_tests! {
+        std: crate::StdSorter,
         merge: MergeSort,
         bubble: BubbleSort,
         heap: HeapSort,
