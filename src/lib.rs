@@ -4,6 +4,7 @@
 */
 
 pub mod bubble;
+pub mod bucket;
 pub mod heap;
 pub mod insertion;
 pub mod merge;
@@ -15,6 +16,8 @@ pub trait Sorter<T> {
     where
         T: PartialEq + Ord + Clone;
 }
+
+//rust std sort
 pub struct StdSorter;
 
 impl<T> Sorter<T> for StdSorter {
@@ -26,10 +29,23 @@ impl<T> Sorter<T> for StdSorter {
     }
 }
 
+//rust std unstable sort
+pub struct StdUnstableSorter;
+
+impl<T> Sorter<T> for StdUnstableSorter {
+    fn sort(slice: &mut [T])
+    where
+        T: PartialEq + Ord,
+    {
+        slice.sort_unstable();
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::{
         bubble::BubbleSort,
+        bucket::{BHBucketSort, BucketSort},
         heap::HeapSort,
         insertion::InsertionSort,
         merge::MergeSort,
@@ -76,6 +92,13 @@ mod tests {
                 }
 
                 #[test]
+                fn one_el(){
+                    let mut one = vec![1231];
+                    <$type>::sort(&mut one);
+                    assert_eq!(one, &[1231]);
+                }
+
+                #[test]
                 fn already_sorted() {
                     let mut sorted: Vec<i8> = (-50..50).collect();
                     <$type>::sort(&mut sorted);
@@ -87,12 +110,21 @@ mod tests {
     }
     sorting_tests! {
         std: crate::StdSorter,
+        std_unstable: crate::StdUnstableSorter,
         merge: MergeSort,
         bubble: BubbleSort,
         heap: HeapSort,
         insertion: InsertionSort,
         selection: SelectionSort,
         quick: QuickSort,
-        randquick: RandQuickSort,
+        rand_quick: RandQuickSort,
+        bucket_binary_heap: BHBucketSort,
+        bucket_insertion: BucketSort<InsertionSort>,
+        bucket_merge: BucketSort<MergeSort>,
+        bucket_quick: BucketSort<QuickSort>,
+        bucket_bubble: BucketSort<BubbleSort>,
+        bucket_heap: BucketSort<HeapSort>,
+        bucket_selection: BucketSort<SelectionSort>,
+        bubble_rand_quick: BucketSort<RandQuickSort>,
     }
 }
