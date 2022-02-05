@@ -11,7 +11,7 @@ pub struct BHBucketSort;
 
 impl<T> Sorter<T> for BHBucketSort
 where
-    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy + std::fmt::Debug,
+    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy,
 {
     fn sort(slice: &mut [T])
     where
@@ -46,7 +46,7 @@ where
 
 struct BHBucketedVec<T>
 where
-    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy + std::fmt::Debug,
+    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy,
 {
     buckets: VecDeque<BinaryHeap<Reverse<T>>>,
     range: T,
@@ -55,7 +55,7 @@ where
 
 impl<T> BHBucketedVec<T>
 where
-    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy + std::fmt::Debug,
+    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy,
 {
     fn new(min: T, max: T, num_of_buckets: usize) -> Self {
         let range = (max - min) / T::from(num_of_buckets).unwrap();
@@ -96,7 +96,7 @@ pub struct BucketSort<S> {
 impl<T, S> Sorter<T> for BucketSort<S>
 where
     S: Sorter<T>,
-    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy + std::fmt::Debug,
+    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy,
 {
     fn sort(slice: &mut [T])
     where
@@ -135,7 +135,7 @@ where
 
 struct BucketedVec<T>
 where
-    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy + std::fmt::Debug,
+    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy,
 {
     buckets: VecDeque<Vec<T>>,
     range: T,
@@ -144,7 +144,7 @@ where
 
 impl<T> BucketedVec<T>
 where
-    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy + std::fmt::Debug,
+    T: Integer + CheckedDiv + CheckedAdd + NumCast + Clone + Copy,
 {
     fn new(min: T, max: T, num_of_buckets: usize) -> Self {
         let range = (max - min) / T::from(num_of_buckets).unwrap();
