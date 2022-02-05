@@ -1,4 +1,4 @@
-# sortingalgorithms-rust
+# Sorting Algorithms in Rust!
 
 Implementing some sorting algorithims in rust
 
